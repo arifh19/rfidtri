@@ -18,3 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/inventaris', 'InventarisController@index')->name('inventaris.index');
+Route::post('/inventaris', 'InventarisController@store')->name('inventaris.store');
+Route::delete('/inventaris/{id}', 'InventarisController@destroy')->name('inventaris.destroy');
+

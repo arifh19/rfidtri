@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Inventaris;
 use Illuminate\Support\Facades\Auth;
+use Session;
 
 
 class InventarisController extends Controller
@@ -16,8 +17,9 @@ class InventarisController extends Controller
      */
     public function index()
     {
-        $inv = Inventaris::all();
-        return view('inventaris')->with(compact('inv'));
+        $i=1;
+        $invens = Inventaris::all();
+        return view('inventaris')->with(compact('invens','i'));
     }
 
     /**
@@ -44,8 +46,11 @@ class InventarisController extends Controller
         $inv->nama = $request->nama;
         $inv->deskripsi = $request->deskripsi;
         $inv->jumlah = $request->jumlah;
-        $inv->user = $user;
+        $inv->user_id = $user;
         $inv->save();
+
+        return redirect('/inventaris');
+
     }
 
     /**
@@ -88,8 +93,17 @@ class InventarisController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $inven = Inventaris::find($id);
+        if (!$inven->delete()) return redirect()->back();
+        // Handle hapus log via ajax
+        if ($request->ajax()) return response()->json(['id' => $id]);
+        Session::flash("flash_notification", [
+            "level" => "success",
+            "icon" => "fa fa-check",
+            "message" => "Inventaris berhasil dihapus"
+        ]);
+        return redirect()->route('inventaris.index');
     }
 }
