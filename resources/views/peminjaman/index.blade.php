@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Daftar Inventaris
+                    <div class="panel-heading">Daftar Pinjaman
                             <button class="btn btn-primary col-md-offset-10" data-toggle="modal" data-target="#modal-default">Tambah</button>
                     </div>
                     <div class="panel-body">
@@ -13,30 +13,33 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>No. Inventaris</th>
+                                    <th>Peminjam</th>
                                     <th>Nama Barang</th>
-                                    <th>Deskripsi</th>
-                                    <th>Jumlah</th>
-                                    <th>Ditambahkan oleh</th>
+                                    <th>Status</th>
+                                    <th>Tanggan Peminjaman</th>
+                                    <th>Tanggal Pengembalian</th>
                                     <th>Created at</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                
-                                @foreach($invens as $inv)
+                                @foreach($peminjamans as $pem)
                                     <tr>
                                         <td>{{$i}}</td>
-                                        <td>{{$inv->no_inv}}</td>
-                                        <td>{{$inv->nama}}</td>
-                                        <td>{{$inv->deskripsi}}</td>
-                                        <td>{{$inv->jumlah}}</td>
-                                        <td>{{$inv->user->name}}</td>
-                                        <td>{{$inv->created_at}}</td>
+                                        <td>{{$pem->kartu->nama}}</td>
+                                        <td>{{$pem->inventaris->nama}}</td>
+                                        <td>@if($pem->status==1) 
+                                            {{"Sedang dipinjam"}}
+                                            @else {{"Telah dikembalikan"}}
+                                            @endif</td>
+                                        <td>{{$pem->tanggal_peminjaman}}</td>
+                                        <td>{{$pem->tanggal_pengembalian}}</td>
+                                        <td>{{$pem->created_at}}</td>
                                         
                                     <td>
                                         <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#modal-default"><i class="fa fa-edit"></i></button>
-                                        {{ Form::open(['url' => route('inventaris.destroy', $inv->id), 'method' => 'delete', 'class' => 'btn btn-outline-danger']) }}
+                                        {{ Form::open(['url' => route('inventaris.destroy', $pem->id), 'method' => 'delete', 'class' => 'btn btn-outline-danger']) }}
                                             <button type="submit" class="btn btn-outline-danger"><i class="fa fa-trash"></i></button>
                                         {{ Form::close() }}
                                     </td>

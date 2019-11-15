@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Peminjaman;
+use App\Kehadiran;
+use App\Inventaris;
 
 class PeminjamanController extends Controller
 {
@@ -13,7 +16,9 @@ class PeminjamanController extends Controller
      */
     public function index()
     {
-        //
+        $i=1;
+        $peminjamans = Peminjaman::all();
+        return view('peminjaman.index')->with(compact('peminjamans','i'));
     }
 
     /**
@@ -23,7 +28,9 @@ class PeminjamanController extends Controller
      */
     public function create()
     {
-        //
+        $kehadirans = Kehadiran::where('status',1)->get();
+        $barangs = Inventaris::all();
+        return view('peminjaman.create')->with(compact('kehadirans','barangs'));
     }
 
     /**
