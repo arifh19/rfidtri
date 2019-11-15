@@ -5,41 +5,46 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Daftar Inventaris
-                            <button class="btn btn-primary col-md-offset-10" data-toggle="modal" data-target="#modal-default">Tambah</button>
+                    <div class="panel-heading">Daftar Kehadiran
                     </div>
                     <div class="panel-body">
                         <table class="table table-bordered" id="laravel_datatable">
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>No. Inventaris</th>
-                                    <th>Nama Barang</th>
-                                    <th>Deskripsi</th>
-                                    <th>Jumlah</th>
-                                    <th>Ditambahkan oleh</th>
+                                    <th>Nama Lengkap</th>
+                                    <th>NIM</th>
+                                    <th>Jam Masuk</th>
+                                    <th>Jam Keluar</th>
+                                    <th>Status</th>
                                     <th>Created at</th>
-                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                
-                                @foreach($invens as $inv)
+                                @foreach($hadirs as $had)
                                     <tr>
                                         <td>{{$i}}</td>
-                                        <td>{{$inv->no_inv}}</td>
-                                        <td>{{$inv->nama}}</td>
-                                        <td>{{$inv->deskripsi}}</td>
-                                        <td>{{$inv->jumlah}}</td>
-                                        <td>{{$inv->user->name}}</td>
-                                        <td>{{$inv->created_at}}</td>
+                                        <td>{{$had->kartu->nama}}</td>
+                                        <td>{{$had->kartu->nim}}</td>
+                                        <td>{{$had->clock_in}}</td>
+                                        <td>
+                                            @if($had->clock_out==null)
+                                                -
+                                            @else
+                                                {{$had->clock_out}}
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if($had->status==0)
+                                                Masuk
+                                            @else
+                                                Keluar
+                                            @endif
+                                        </td>
+                                        <td>{{$had->created_at}}</td>
                                         
-                                    <td>
-                                        {{-- <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#modal-default"><i class="fa fa-edit"></i></button> --}}
-                                        {{ Form::open(['url' => route('inventaris.destroy', $inv->id), 'method' => 'delete', 'class' => 'btn btn-outline-danger']) }}
-                                            <button type="submit" class="btn btn-outline-danger"><i class="fa fa-trash"></i></button>
-                                        {{ Form::close() }}
-                                    </td>
+                                
                                     </tr> 
                                     <div hidden>{{$i++}}<div>
                                 @endforeach  

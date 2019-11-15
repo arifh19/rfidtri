@@ -10,6 +10,10 @@ use Session;
 
 class InventarisController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -48,7 +52,11 @@ class InventarisController extends Controller
         $inv->jumlah = $request->jumlah;
         $inv->user_id = $user;
         $inv->save();
-
+        Session::flash("flash_notification", [
+            "level" => "success",
+            "icon" => "fa fa-check",
+            "message" => "Inventaris berhasil disimpan"
+        ]);
         return redirect('/inventaris');
 
     }

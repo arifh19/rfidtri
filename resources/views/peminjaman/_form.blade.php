@@ -4,7 +4,6 @@
             <select name="kartu_id" class="form-control select2" required>
                 <option value="" disabled selected>Tentukan nama peminjam</option>
                 @foreach($kehadirans as $hadir)
-                    
                     <option value="{{$hadir->kartu_id}}">{{$hadir->kartu->nama}}</option>
                 @endforeach
             </select>
@@ -21,11 +20,11 @@
             </select>
             {!! $errors->first('inventaris_id', '<p class="help-block">:message</p>') !!}
         </div>
-        <div class="form-group has-feedback{{ $errors->has('waktu') ? ' has-error' : '' }}">
-            {!! Form::label('waktu', 'Alokasi Waktu') !!}
+        <div class="form-group has-feedback{{ $errors->has('jumlah') ? ' has-error' : '' }}">
+            {!! Form::label('jumlah', 'Kuantitas') !!}
     
-            {!! Form::number('waktu', null, ['class' => 'form-control', 'placeholder' => 'Alokasi Waktu','required']) !!}
-            {!! $errors->first('waktu', '<p class="help-block">:message</p>') !!}
+            {!! Form::number('jumlah', null, ['class' => 'form-control', 'placeholder' => 'Kuantitas','required']) !!}
+            {!! $errors->first('jumlah', '<p class="help-block">:message</p>') !!}
         </div>
     
     </div>

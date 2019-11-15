@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">Daftar Pinjaman
-                            <button class="btn btn-primary col-md-offset-10" data-toggle="modal" data-target="#modal-default">Tambah</button>
+                        <a href="{{route('peminjaman.create')}}" class="btn btn-primary col-md-offset-10" >Tambah</a>
                     </div>
                     <div class="panel-body">
                         <table class="table table-bordered" id="laravel_datatable">
@@ -34,14 +34,18 @@
                                             @else {{"Telah dikembalikan"}}
                                             @endif</td>
                                         <td>{{$pem->tanggal_peminjaman}}</td>
-                                        <td>{{$pem->tanggal_pengembalian}}</td>
+                                        <td>
+                                            @if($pem->tanggal_pengembalian==null)
+                                                Sedang dalam peminjaman
+                                            @else
+                                                {{$pem->tanggal_pengembalian}}
+                                            @endif
+                                        </td>
                                         <td>{{$pem->created_at}}</td>
                                         
                                     <td>
-                                        <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#modal-default"><i class="fa fa-edit"></i></button>
-                                        {{ Form::open(['url' => route('inventaris.destroy', $pem->id), 'method' => 'delete', 'class' => 'btn btn-outline-danger']) }}
-                                            <button type="submit" class="btn btn-outline-danger"><i class="fa fa-trash"></i></button>
-                                        {{ Form::close() }}
+                                        {{-- <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#modal-default"><i class="fa fa-edit"></i></button> --}}
+                                        <a href="{{route('peminjaman.kembali',['id'=>$pem->id,'inventaris_id'=>$pem->inventaris_id])}}" aria-label="aa" class="btn btn-primary btn-outline-success">Kembali</a>
                                     </td>
                                     </tr> 
                                     <div hidden>{{$i++}}<div>

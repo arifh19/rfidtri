@@ -164,6 +164,7 @@
                             Tapi Lebih enak pakai Request::is()
                             -->
                             {!! Html::smartNav(url('home'), 'fa-dashboard', 'Dashboard') !!}
+                            {!! Html::smartNav(url('kehadiran'), 'fa-users', 'Kehadiran') !!}
                             {!! Html::smartNav(url('inventaris'), 'fa-save', 'Inventaris') !!}
                             {!! Html::smartNav(url('peminjaman'), 'fa fa-search', 'Peminjaman') !!}
                            

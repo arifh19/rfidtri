@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('dashboard')
-Program Kerja
-    <small>Tambah Config</small>
+Peminjaman Barang
+    <small>Input Peminjaman</small>
 @endsection
 
 @section('breadcrumb')
@@ -14,11 +14,9 @@ Program Kerja
 @section('content')
 
     <div class="row">
-        <div class="col-md-5">
-            <div class="box box-primary">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Isi Form</h3>
-                </div>
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Isi Form</div>
                 <!-- /.box-header -->
                 <!-- form start -->
                 {!! Form::open(['url' => route('peminjaman.store'), 'method' => 'post']) !!}

@@ -14,9 +14,12 @@ class KehadiranController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function index()
     {
-        //
+        $i=1;
+        $hadirs = Kehadiran::all()->sortByDesc('created_at');
+        return view('kehadiran')->with(compact('hadirs','i'));
     }
 
     /**

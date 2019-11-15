@@ -18,6 +18,7 @@ class CreatePeminjamenTable extends Migration
             $table->unsignedInteger('kartu_id');
             $table->unsignedInteger('inventaris_id');
             $table->boolean('status')->default(0);
+            $table->unsignedInteger('jumlah');
             $table->string('tanggal_peminjaman');
             $table->string('tanggal_pengembalian')->nullable();
             $table->timestamps();

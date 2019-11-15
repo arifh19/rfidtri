@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Kehadiran;
+use App\Peminjaman;
+use App\Inventaris;
 
 class HomeController extends Controller
 {
@@ -23,6 +26,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $kehadiran = Kehadiran::all();
+        $peminjaman = Peminjaman::all();
+        $inventaris = Inventaris::all();
+        $pinjam = Peminjaman::where('status',1)->get();
+        $kembali = Peminjaman::where('status',0)->get();
+        return view('home')->with(compact('kehadiran','peminjaman', 'pinjam','kembali','inventaris'));
     }
 }
